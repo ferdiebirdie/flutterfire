@@ -66,6 +66,7 @@ class DocumentReference {
   Future<DocumentSnapshot> get({
     platform.Source source = platform.Source.serverAndCache,
   }) async {
+    source = Firestore.source;
     return DocumentSnapshot._(await _delegate.get(source: source), firestore);
   }
 

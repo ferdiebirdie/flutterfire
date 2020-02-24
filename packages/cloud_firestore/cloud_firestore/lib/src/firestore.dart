@@ -88,14 +88,27 @@ class Firestore {
         timeout: timeout);
   }
 
+  // The source of which the data will come from.
+  static platform.Source _source = platform.Source.serverAndCache;
+
+  static platform.Source get source => _source;
+
   Future<void> settings(
           {bool persistenceEnabled,
           String host,
           bool sslEnabled,
-          int cacheSizeBytes}) =>
-      _delegate.settings(
+          int cacheSizeBytes,
+          platform.Source source}) async {
+      
+      await _delegate.settings(
           persistenceEnabled: persistenceEnabled,
           host: host,
           sslEnabled: sslEnabled,
           cacheSizeBytes: cacheSizeBytes);
+      
+      if (source != null) _source = source;
+    }
+
+
+  
 }

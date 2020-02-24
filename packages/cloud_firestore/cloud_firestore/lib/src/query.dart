@@ -34,6 +34,7 @@ class Query {
     platform.Source source = platform.Source.serverAndCache,
   }) async {
     assert(source != null);
+    source = Firestore.source;
     final docs = await _delegate.getDocuments(source: source);
     return QuerySnapshot._(docs, firestore);
   }
